@@ -1,0 +1,13 @@
+{
+  "name": "climate-health-data-catalogue",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Builds the printable DOCX of the Pasteur Network Climate and Health Metadata Catalogue from catalogue.json.",
+  "license": "MIT",
+  "scripts": {
+    "build:docx": "node build_docx.js"
+  },
+  "dependencies": {
+    "docx": "^8.5.0"
+  }
+}

@@ -1,0 +1,15 @@
+# Dependencies of the two Markdown converters, convert2pdf.py and convert2docx.py,
+# which build README.pdf, EDITING_GUIDE.pdf and any DOCX made from Markdown.
+# build_web.py needs nothing beyond the standard library; build_docx.js is Node
+# and takes its dependency from package.json.
+
+markdown>=3.5          # Markdown to HTML, with tables, footnotes and fenced code
+weasyprint>=61         # HTML to PDF, used by convert2pdf.py
+python-docx>=1.1       # Word output, used by convert2docx.py
+lxml>=5.0              # XML surgery on the Word package, used by convert2docx.py
+
+# Optional, and only for Markdown containing $...$ maths. Neither is a Python
+# package: install them with the system package manager.
+#   convert2pdf.py  needs pdflatex (with amsmath and amssymb) and pdftocairo
+#   convert2docx.py needs pandoc
+# A file with no dollar signs in it calls neither.

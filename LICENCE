@@ -1,12 +1,13 @@
-Climate and Health Metadata Catalogue
-Copyright (c) 2026 Institut Pasteur de São Paulo (IPSP) and
-Mauro César Cafundó de Morais
+Pasteur Network Climate and Health Metadata Catalogue
+Copyright (c) 2026 Pasteur Network, Institut Pasteur de São Paulo (IPSP)
+and Mauro César Cafundó de Morais
 
 This repository holds two kinds of material, licensed separately.
 
 SOFTWARE — MIT Licence
     build_web.py
     build_docx.js
+    convert2pdf.py, convert2docx.py
     and the HTML, CSS and JavaScript these scripts emit into docs/
 
 CATALOGUE CONTENT AND DOCUMENTATION — Creative Commons Attribution 4.0
@@ -20,8 +21,8 @@ International (CC BY 4.0)
 
 Attribute the content as:
 
-    IPSP Climate and Health Metadata Catalogue, Institut Pasteur de São
-    Paulo, https://mauroccm.github.io/climate-health-catalogue/
+    Pasteur Network Climate and Health Metadata Catalogue, Pasteur
+    Network, https://pasteurnetwork.github.io/climate-health-data-catalogue/
 
 WHAT THIS LICENCE DOES NOT COVER
 
@@ -36,8 +37,8 @@ right to them.
 MIT License — applies to the software listed above
 =======================================================================
 
-Copyright (c) 2026 Institut Pasteur de São Paulo (IPSP) and
-Mauro César Cafundó de Morais
+Copyright (c) 2026 Pasteur Network, Institut Pasteur de São Paulo (IPSP)
+and Mauro César Cafundó de Morais
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the

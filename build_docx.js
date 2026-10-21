@@ -16,8 +16,31 @@ const gaps = fs.existsSync(GAPS_SRC) ? JSON.parse(fs.readFileSync(GAPS_SRC, 'utf
 
 const W = 9638;               // usable width in DXA (A4 portrait, 2 cm margins)
 const INK = '16212B', GREY = '6B7A85', RULE = 'CBD5DB';
-const DOM = { Health: 'B4531F', Climate: '1F6F6B', Environment: '4A5E23', Reference: '46506B', Derived: '6B3F6B' };
+// Declared in catalogue.json so this document and the web page cannot drift
+// apart; Word wants the hex without the leading '#'.
+const DOM = Object.fromEntries(Object.entries(cat.domains).map(([k, v]) => [k, v.replace('#', '')]));
 const PROJ = {}; cat.projects.forEach(p => PROJ[p.code] = p);
+
+const eyebrow = [cat.institution, cat.member].filter(Boolean).join(' · ')
+  + (cat.unit ? ' — ' + cat.unit : '');
+
+// Every record key this document accounts for: the ones the per-dataset table
+// prints, the ones its header prints, and the two granularity ranks, which are a
+// web-page device and are deliberately not shown here. Anything else would be
+// dropped without a trace, so say so instead.
+const COVERED = new Set([
+  'id', 'title', 'title_pt', 'domain', 'projects',
+  'description', 'key_variables', 'custodian', 'producer', 'contact',
+  'spatial_coverage', 'native_resolution', 'analysis_unit', 'temporal_coverage',
+  'temporal_resolution', 'update_frequency', 'latency', 'access', 'access_url',
+  'formats', 'licence', 'sharing_conditions', 'personal_data', 'linkage_key',
+  'limitations', 'holding_status', 'steward', 'record_status',
+  'spatial_grain', 'temporal_grain'
+]);
+const uncovered = [...new Set(sets.flatMap(Object.keys))].filter(k => !COVERED.has(k));
+if (uncovered.length) {
+  console.warn('warning: record field(s) not shown in the DOCX: ' + uncovered.join(', '));
+}
 
 const NONE = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
 const thin = c => ({ style: BorderStyle.SINGLE, size: 4, color: c || RULE });
@@ -48,7 +71,7 @@ const cell = (children, o = {}) => new TableCell({
 
 // ---------- front matter ----------
 const body = [
-  p(cat.institution + ' — Climate and Health Laboratory', { caps: true, size: 15, color: GREY, after: 160 }),
+  p(eyebrow, { caps: true, size: 15, color: GREY, after: 160 }),
   new Paragraph({
     spacing: { after: 120 }, heading: HeadingLevel.TITLE,
     children: [new TextRun({ text: cat.title, bold: true, size: 44, color: INK, font: 'Calibri' })]
